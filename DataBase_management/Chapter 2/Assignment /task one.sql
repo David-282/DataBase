@@ -117,3 +117,20 @@ FROM INVENTORY
     WHERE WAREHOUSE.Manager = 'Lucille Smith';
 
 
+SELECT WarehouseID,
+       SUM(QuantityOnOrder) AS TotalItemsOnOrder,
+       SUM(QuantityOnHand) AS TotalItemsOnHand
+FROM INVENTORY
+GROUP BY WarehouseID, QuantityOnOrder;
+
+
+-- Subqueries are queries inside another query and are executed first to return a result used by the main query, while joins combine data from two or more tables directly in a single query result.
+-- You cannot use a subquery because the question requires all the grouping and calculations to be done together in one query, and a subquery works on its own first, so it cannot properly handle it.
+
+SELECT WAREHOUSE.*,
+       INVENTORY.SKU,
+       INVENTORY.SKU_Description,
+       INVENTORY.QuantityOnHand,
+       INVENTORY.QuantityOnOrder
+FROM WAREHOUSE
+LEFT JOIN INVENTORY ON WAREHOUSE.WarehouseID = INVENTORY.WarehouseID;
